@@ -252,5 +252,8 @@
     <MASM Include="src\cpuid.asm">
       <Filter>源文件\Hook</Filter>
     </MASM>
+    <MASM Include="src\ilink_wrapper_proxy.asm">
+      <Filter>源文件\Hook</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

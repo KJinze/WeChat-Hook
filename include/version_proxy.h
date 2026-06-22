@@ -1,8 +1,11 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
-// 初始化真实 version.dll
 void InitRealDll();
-
-// 你的自定义初始化入口
 void CustomInit(HMODULE hModule);
+
+extern "C" {
+extern void* g_ilink_wrapper_exports[8];
+}

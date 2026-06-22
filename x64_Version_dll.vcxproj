@@ -74,12 +74,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>.\xdb;.\minhook\src\hde;.\minhook\src;.\minhook\include;.\include;.\3rdparty;$(IncludePath)</IncludePath>
-    <TargetName>version</TargetName>
+    <TargetName>ilink_wrapper</TargetName>
     <EnableClServerMode>false</EnableClServerMode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>.\xdb;.\minhook\src\hde;.\minhook\src;.\minhook\include;.\include;.\3rdparty;$(IncludePath)</IncludePath>
-    <TargetName>version</TargetName>
+    <TargetName>ilink_wrapper</TargetName>
     <EnableClServerMode>false</EnableClServerMode>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -237,6 +237,7 @@
     <MASM Include="src\cpuid.asm">
       <FileType>Document</FileType>
     </MASM>
+    <MASM Include="src\ilink_wrapper_proxy.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
