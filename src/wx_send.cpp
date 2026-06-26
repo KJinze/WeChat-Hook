@@ -470,20 +470,32 @@ namespace WeixinSend
         );
     }
 
-    void SendText(const std::string& wxidorgid, const std::string& msg)
+    int64_t SendText(const std::string& wxidorgid, const std::string& msg)
     {
         uintptr_t base = GetWeixinDllBase();
+        if (!base)
+            return -2001;
+        if (wxidorgid.empty())
+            return -1001;
+        if (msg.empty())
+            return -1002;
 
 		//不同版本需要调整 msgBuf 大小，过小会导致发送失败，过大会浪费内存 
         uint64_t* msgBuf = HeapAlloc_mb<uint64_t>(0x768);
+        if (!msgBuf)
+            return -3001;
         BuildTextMessage(msgBuf, msg, wxidorgid);
 
         uint64_t* data = HeapAlloc_mb<uint64_t>(0x20);
+        if (!data)
+            return -3002;
         data[0] = (uint64_t)(msgBuf + 2);
         data[1] = (uint64_t)(msgBuf);
         data[2] = 0;
 
         uint64_t* arg1 = HeapAlloc_mb<uint64_t>(0x28);
+        if (!arg1)
+            return -3003;
         arg1[0] = base + offset::param1_vtable;
         arg1[1] = reinterpret_cast<uint64_t>(data);
         arg1[2] = (uint64_t)data + 0x10;
@@ -491,10 +503,12 @@ namespace WeixinSend
         arg1[4] = 1;
 
         uint64_t* arg2 = HeapAlloc_mb<uint64_t>(0xE8);
+        if (!arg2)
+            return -3004;
         BuildSendParam2_Text(arg2);
 
         WeixinCall send_message = (WeixinCall)(base + offset::send_message);
-        send_message((uint64_t)arg1, (uint64_t)arg2);
+        return send_message((uint64_t)arg1, (uint64_t)arg2);
     }
 
 
