@@ -175,6 +175,7 @@ void Evt_WeixinLoad()
 
     进程PID = GetCurrentProcessId();
     父进程PID = GetParentProcessId();
+    g_IsLogin = 1;
 
     //过低版本 4.1.8.67
     //Patch_Low_Version_m2();
